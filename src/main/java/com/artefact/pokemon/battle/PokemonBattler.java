@@ -228,15 +228,15 @@ public class PokemonBattler {
     private void executeMove(Pokemon attacker, Pokemon defender, Move move) {
         if (move.attemptHit()) {
             double typeMultiplier = getTypeMultiplier(attacker.type, defender.type);
-            int damage = (int)(move.getBasePower() * typeMultiplier);
+            int damage = (int)(move.basePower() * typeMultiplier);
             defender.takeDamage(damage);
 
             String effectiveness = typeMultiplier > 1.0 ? " It's super effective!" : "";
-            addCommentary(attacker.name + " used " + move.getName() +
+            addCommentary(attacker.name + " used " + move.name() +
                     " dealing " + damage + " damage!" + effectiveness);
         } else {
             System.out.println("The attack missed!");
-            addCommentary(attacker.name + "'s " + move.getName() + " missed!");
+            addCommentary(attacker.name + "'s " + move.name() + " missed!");
         }
     }
 
@@ -259,8 +259,8 @@ public class PokemonBattler {
         for (int i = 0; i < pokemon.moves.size(); i++) {
             Move move = pokemon.moves.get(i);
             System.out.printf("%d. %s (Power: %d, Accuracy: %.0f%%)\n",
-                    i + 1, move.getName(), move.getBasePower(),
-                    move.getAccuracy() * 100);
+                    i + 1, move.name(), move.basePower(),
+                    move.accuracy() * 100);
         }
     }
 

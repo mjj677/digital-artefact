@@ -6,7 +6,7 @@ import com.artefact.utils.Constants;
 
 /**
  * WaterPokemon class represents water-type Pokemon.
- * Implements specific water-type moves and type effectiveness calculations.
+ * Implements specific water-type moves.
  * Inherits base Pokemon attributes and behaviours.
  */
 public class WaterPokemon extends Pokemon {
@@ -41,7 +41,7 @@ public class WaterPokemon extends Pokemon {
                 health,
                 attackPower,
                 "It has jet nozzles on its shell. This impressive Pokemon uses these jets " +
-                        "to charge toward foes with all the force of a rocket.",
+                           "to charge toward foes with all the force of a rocket.",
                 WaterPokemon.class
         );
     }

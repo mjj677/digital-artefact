@@ -124,7 +124,7 @@ public class Main {
     // ====== Summary Generation ======
 
     /**
-     * Creates a personalized summary using the collected user information
+     * Creates a personalised summary using the collected user information
      * @param firstName User's first name
      * @param lastName User's last name
      * @param placeOfWork User's workplace

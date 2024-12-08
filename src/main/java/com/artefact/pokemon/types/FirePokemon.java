@@ -6,7 +6,7 @@ import com.artefact.pokemon.Move;
 
 /**
  * FirePokemon class represents fire-type Pokemon.
- * Implements specific fire-type moves and type effectiveness calculations.
+ * Implements specific fire-type moves.
  * Inherits base Pokemon attributes and behaviours.
  */
 public class FirePokemon extends Pokemon {

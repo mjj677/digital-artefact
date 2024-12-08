@@ -8,7 +8,7 @@ package com.artefact.utils;
 public final class Constants {
     // Prevent instantiation
     private Constants() {
-        throw new UnsupportedOperationException("Utility class should not be instantiated");
+        throw new UnsupportedOperationException("This utility class should not be instantiated");
     }
 
     // File System Constants

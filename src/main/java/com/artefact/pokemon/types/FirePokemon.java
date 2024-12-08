@@ -1,5 +1,6 @@
 package com.artefact.pokemon.types;
 
+import com.artefact.utils.Constants;
 import com.artefact.pokemon.Pokemon;
 import com.artefact.pokemon.Move;
 
@@ -75,19 +76,19 @@ public class FirePokemon extends Pokemon {
         moves.add(new Move(
                 "Fire Blast",    // High power, medium accuracy
                 20,
-                0.85,
+                Constants.MEDIUM_ACCURACY,
                 "A powerful blast of fire"
         ));
         moves.add(new Move(
                 "Ember",         // Lower power, high accuracy
                 15,
-                0.95,
+                Constants.HIGH_ACCURACY,
                 "A weak but accurate fire attack"
         ));
         moves.add(new Move(
                 "Inferno",       // Highest power, low accuracy
                 25,
-                0.70,
+                Constants.LOW_ACCURACY,
                 "A devastating but inaccurate attack"
         ));
     }

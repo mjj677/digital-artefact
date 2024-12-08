@@ -2,6 +2,7 @@ package com.artefact.pokemon.types;
 
 import com.artefact.pokemon.Pokemon;
 import com.artefact.pokemon.Move;
+import com.artefact.utils.Constants;
 
 /**
  * WaterPokemon class represents water-type Pokemon.
@@ -77,19 +78,19 @@ public class WaterPokemon extends Pokemon {
         moves.add(new Move(
                 "Wave Crash",    // High power, low accuracy
                 20,
-                0.6,
+                Constants.MEDIUM_ACCURACY,
                 "A powerful wave crashes down!"
         ));
         moves.add(new Move(
                 "Water Gun",     // Lower power, high accuracy
                 15,
-                0.95,
+                Constants.HIGH_ACCURACY,
                 "A weak but accurate water attack"
         ));
         moves.add(new Move(
                 "Hydro Pump",    // Highest power, medium accuracy
                 25,
-                0.70,
+                Constants.LOW_ACCURACY,
                 "A devastating but inaccurate attack."
         ));
     }

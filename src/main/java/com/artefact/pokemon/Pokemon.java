@@ -1,5 +1,7 @@
 package com.artefact.pokemon;
 
+import com.artefact.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +22,6 @@ public abstract class Pokemon {
     public int healCount = 2;    // Available healing moves
     public List<Move> moves;     // List of battle moves
     public String description;   // Pokemon's description text
-    public int MAX_HEALTH;       // Maximum possible health points
 
     // ====== Constructor ======
 
@@ -36,7 +37,6 @@ public abstract class Pokemon {
         this.name = name;
         this.type = type;
         this.health = health;
-        this.MAX_HEALTH = health;
         this.attackPower = attackPower;
         this.description = description;
         this.moves = new ArrayList<>();
@@ -83,12 +83,12 @@ public abstract class Pokemon {
      */
     public String getHealthBar() {
         int barLength = 20;
-        int filledBars = (int)((double)health / MAX_HEALTH * barLength);
+        int filledBars = (int)((double)health / Constants.MAX_HEALTH * barLength);
         StringBuilder healthBar = new StringBuilder("[");
         for (int i = 0; i < barLength; i++) {
             healthBar.append(i < filledBars ? "█" : "░");
         }
-        healthBar.append("] ").append(health).append("/").append(MAX_HEALTH);
+        healthBar.append("] ").append(health).append("/").append(Constants.MAX_HEALTH);
         return healthBar.toString();
     }
 
@@ -107,14 +107,6 @@ public abstract class Pokemon {
         if (this.health < 0) this.health = 0;
     }
 
-    /**
-     * Calculates probability of missing an attack
-     * @return Random value between 0 and 100
-     */
-    public int missAttack() {
-        return (int)(Math.random() * 101);
-    }
-
     // ====== Healing Methods ======
 
     /**
@@ -123,9 +115,9 @@ public abstract class Pokemon {
      */
     public void heal() {
         if (potions > 0) {
-            int healAmount = 30;
-            if (health + healAmount > MAX_HEALTH) {
-                healAmount = MAX_HEALTH - health;
+            int healAmount = Constants.BASE_HEAL_AMOUNT;
+            if (health + healAmount > Constants.MAX_HEALTH) {
+                healAmount = Constants.MAX_HEALTH - health;
             }
             health += healAmount;
             potions--;
@@ -142,8 +134,8 @@ public abstract class Pokemon {
     public void computerHeal() {
         if (healCount > 0) {
             int healAmount = (int)(Math.random() * 21) + 10;
-            if (health + healAmount > MAX_HEALTH) {
-                healAmount = MAX_HEALTH - health;
+            if (health + healAmount > Constants.MAX_HEALTH) {
+                healAmount = Constants.MAX_HEALTH - health;
             }
             health += healAmount;
             healCount--;

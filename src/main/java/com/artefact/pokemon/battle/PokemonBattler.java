@@ -1,5 +1,6 @@
 package com.artefact.pokemon.battle;
 
+import com.artefact.utils.Constants;
 import com.artefact.pokemon.Pokemon;
 import com.artefact.pokemon.types.FirePokemon;
 import com.artefact.pokemon.types.WaterPokemon;
@@ -153,6 +154,7 @@ public class PokemonBattler {
                     }
                     case 3 -> {
                         System.out.println("You surrendered the battle!");
+                        System.out.println("Returning to menu... \n");
                         addCommentary(player.name + " surrendered the battle!");
                         saveBattleResults(computer, player);
                         return false;  // Indicate surrender
@@ -283,7 +285,7 @@ public class PokemonBattler {
         if (attackerType.equals("Water") && defenderType.equals("Fire") ||
                 attackerType.equals("Fire") && defenderType.equals("Grass") ||
                 attackerType.equals("Grass") && defenderType.equals("Water")) {
-            return 1.1;
+            return Constants.TYPE_ADVANTAGE_MULTIPLIER;
         }
         return 1.0;
     }
@@ -293,7 +295,7 @@ public class PokemonBattler {
      */
     private void addCommentary(String comment) {
         battleCommentary.add(comment);
-        if (battleCommentary.size() > 5) {
+        if (battleCommentary.size() > Constants.MAX_BATTLE_HISTORY) {
             battleCommentary.remove(0);
         }
     }

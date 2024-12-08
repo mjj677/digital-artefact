@@ -2,6 +2,7 @@ package com.artefact.pokemon.types;
 
 import com.artefact.pokemon.Pokemon;
 import com.artefact.pokemon.Move;
+import com.artefact.utils.Constants;
 
 /**
  * GrassPokemon class represents grass-type Pokemon.
@@ -77,19 +78,19 @@ public class GrassPokemon extends Pokemon {
         moves.add(new Move(
                 "Leaf Storm",    // High power, medium accuracy
                 20,
-                0.7,
+                Constants.MEDIUM_ACCURACY,
                 "A powerful hurricane of leaves!"
         ));
         moves.add(new Move(
                 "Leaf Blade",    // Lower power, high accuracy
                 15,
-                0.95,
+                Constants.HIGH_ACCURACY,
                 "A weak but accurate leaf attack"
         ));
         moves.add(new Move(
                 "Solar Beam",    // Highest power, lowest accuracy
                 25,
-                0.6,
+                Constants.LOW_ACCURACY,
                 "A devastating but inaccurate attack."
         ));
     }

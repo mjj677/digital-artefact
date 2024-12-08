@@ -1,6 +1,8 @@
 package com.artefact;
 
 import com.artefact.menu.MenuSystem;
+import com.artefact.utils.Constants;
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -17,6 +19,9 @@ public class GreetingPage {
      * Collects user information and initialises the menu system
      */
     public static void main(String[] args) {
+        // Create output directory first
+        createOutputDirectory();
+
         System.out.println("Hello and welcome to the programme. \nBefore we start, lets collect some data about you.");
 
         // Using try-with-resources to ensure scanner is properly closed
@@ -41,6 +46,22 @@ public class GreetingPage {
 
         } catch (Exception e) {
             System.out.println("An error has occurred: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Creates the output directory if it doesn't exist
+     */
+    private static void createOutputDirectory() {
+        File directory = new File(Constants.OUTPUT_DIR);
+        if (!directory.exists()) {
+            boolean created = directory.mkdirs();
+            if (!created) {
+                System.err.println("Warning: Failed to create output directory: " + Constants.OUTPUT_DIR);
+                System.err.println("Please ensure you have write permissions in this directory.");
+            } else {
+                System.out.println("Created output directory: " + Constants.OUTPUT_DIR);
+            }
         }
     }
 

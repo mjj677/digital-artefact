@@ -2,15 +2,17 @@ package com.artefact;
 
 import com.artefact.menu.MenuSystem;
 import com.artefact.utils.Constants;
+import com.artefact.utils.DataLoader;
 import java.io.File;
 import java.util.Scanner;
+import java.util.Map;
 
 /**
- * GreetingPage class handles the initial user interaction and data collection.
+ * Main class handles the initial user interaction, data collection and file output folder creation.
  * It manages user input, validation, and creates a personalised summary before
  * launching the main menu system.
  */
-public class GreetingPage {
+public class Main {
 
     // ====== Main Method ======
 
@@ -24,28 +26,51 @@ public class GreetingPage {
 
         System.out.println("Hello and welcome to the programme. \nBefore we start, lets collect some data about you.");
 
+        Map<String, String> previousData = DataLoader.loadMostRecentUserData();
+
+        String firstName, lastName, placeOfWork;
+        int yearsOfWork;
+
         // Using try-with-resources to ensure scanner is properly closed
         try (Scanner scanner = new Scanner(System.in)) {
-            // Collect user information
-            String firstName = getStringInput("\nWhat is your first name?", scanner);
-            String lastName = getStringInput("What is your last name?", scanner);
-            String placeOfWork = getStringInput("Where do you work?", scanner);
-            int yearsOfWork = getIntInput("How many years have you worked for " + placeOfWork + "?", scanner);
+            if (previousData != null && !previousData.isEmpty()) {
+                System.out.println("\nPrevious user data found:");
+                System.out.println("First name: " + previousData.get("First name"));
+                System.out.println("Last name: " + previousData.get("Last name"));
+                System.out.println("Place of work: " + previousData.get("Place of work"));
+
+                System.out.println("\nWould you like to use this data? (yes/no)");
+                String response = scanner.nextLine().trim().toLowerCase();
+
+                    if (response.equals("yes")) {
+                        firstName = previousData.get("First name");
+                        lastName = previousData.get("Last name");
+                        placeOfWork = previousData.get("Place of work");
+                        yearsOfWork = Integer.parseInt(previousData.get("Years worked in current role"));
+                    } else {
+                       System.out.println("\nLet's collect new data about you.");
+                        firstName = getStringInput("\nWhat is your first name?", scanner);
+                        lastName = getStringInput("What is your last name?", scanner);
+                        placeOfWork = getStringInput("Where do you work?", scanner);
+                        yearsOfWork = getIntInput("How many years have you worked for " + placeOfWork + "?", scanner);
+                    }
+            } else {
+                firstName = getStringInput("\nWhat is your first name?", scanner);
+                lastName = getStringInput("What is your last name?", scanner);
+                placeOfWork = getStringInput("Where do you work?", scanner);
+                yearsOfWork = getIntInput("How many years have you worked for " + placeOfWork + "?", scanner);
+            }
 
             System.out.println("\nOkay, all information has been gathered.");
-
-            // Generate and display user summary
             String summary = createSummary(firstName, lastName, placeOfWork, yearsOfWork);
             System.out.println("\n" + summary);
             System.out.println("\nNow, let's begin...");
 
-            // Initialise and start menu system
             MenuSystem menuSystem = new MenuSystem();
             menuSystem.setUserData(firstName, lastName, placeOfWork, yearsOfWork);
             menuSystem.displayMenu();
-
         } catch (Exception e) {
-            System.out.println("An error has occurred: " + e.getMessage());
+            System.err.println("An error has occurred: " + e.getMessage());
         }
     }
 

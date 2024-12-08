@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class TDEE {
 
     // ====== Class Fields ======
-    private int age;                // User's age
-    private double weight;          // User's weight
-    private int height;             // User's height
-    private int activityLevel;      // User's activity level
-    private double activityFactor;  // Activity factor based on level
-    private double tdeeResult;      // Calculated TDEE result
-    private final Scanner sc = new Scanner(System.in);
+    public int age;                // User's age
+    public double weight;          // User's weight
+    public int height;             // User's height
+    public int activityLevel;      // User's activity level
+    public double activityFactor;  // Activity factor based on level
+    public double tdeeResult;      // Calculated TDEE result
+    public final Scanner sc = new Scanner(System.in);
 
     // ====== Main Method ======
 

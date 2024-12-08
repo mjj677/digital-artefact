@@ -95,7 +95,7 @@ public class PokemonBattler {
     /**
      * Generates a random opponent Pokemon different from player's choice
      */
-    private Pokemon generateOpponent(Pokemon playerPokemon) {
+    public Pokemon generateOpponent(Pokemon playerPokemon) {
         Random rand = new Random();
         Pokemon opponent;
 

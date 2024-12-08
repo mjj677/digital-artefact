@@ -102,7 +102,6 @@ public class PokemonBattler {
         do {
             int choice = rand.nextInt(3) + 1;
             opponent = switch (choice) {
-                case 1 -> FirePokemon.create("Charizard", 100, 20);
                 case 2 -> WaterPokemon.create("Blastoise", 100, 20);
                 case 3 -> GrassPokemon.create("Venusaur", 100, 20);
                 default -> FirePokemon.create("Charizard", 100, 20);
@@ -321,9 +320,14 @@ public class PokemonBattler {
      * Saves battle results to file
      */
     private void saveBattleResults(Pokemon winner, Pokemon loser) {
-        try (FileWriter writer = new FileWriter("battle_history.txt", true)) {
+        // Create the full path using Constants
+        String filename = String.format("%s/battle_history%s",
+                Constants.OUTPUT_DIR,
+                Constants.FILE_EXTENSION);
+
+        try (FileWriter writer = new FileWriter(filename, true)) {  // true for append mode
             LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constants.DATE_TIME_FORMAT);
 
             writer.write("\nBattle @ " + now.format(formatter) + "\n");
             writer.write("Winner: " + winner.name + " (" + winner.type + ")\n");
@@ -333,8 +337,11 @@ public class PokemonBattler {
                 writer.write(comment + "\n");
             }
             writer.write("------------------------\n");
+
+            System.out.println("Battle history saved to: " + filename);
         } catch (IOException e) {
-            System.out.println("Failed to save battle history: " + e.getMessage());
+            System.err.println("Failed to save battle history to " + filename);
+            System.err.println("Error details: " + e.getMessage());
         }
     }
 }

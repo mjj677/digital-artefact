@@ -139,7 +139,7 @@ public class MenuSystem {
     }
 
     public void startPokemonBattle() {
-        System.out.println("Welcome to the Pokemon Battle!");
+        System.out.println("Welcome to the Pokemon Battler!");
         PokemonBattler battler = new PokemonBattler();
         battler.startBattle();
     }

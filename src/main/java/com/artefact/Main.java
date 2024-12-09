@@ -39,21 +39,35 @@ public class Main {
                 System.out.println("Last name: " + previousData.get("Last name"));
                 System.out.println("Place of work: " + previousData.get("Place of work"));
 
-                System.out.println("\nWould you like to use this data? (yes/no)");
-                String response = scanner.nextLine().trim().toLowerCase();
+                boolean validResponse = false;
+                boolean useExistingData = false;
 
-                    if (response.equals("yes")) {
-                        firstName = previousData.get("First name");
-                        lastName = previousData.get("Last name");
-                        placeOfWork = previousData.get("Place of work");
-                        yearsOfWork = Integer.parseInt(previousData.get("Years worked in current role"));
+                while (!validResponse) {
+                    System.out.println("\nWould you like to use this data? (yes/no)");
+                    String response = scanner.nextLine().trim().toLowerCase();
+
+                    if (response.equals("yes") || response.equals("y")) {
+                        validResponse = true;
+                        useExistingData = true;
+                    } else if (response.equals("no") || response.equals("n")) {
+                        validResponse = true;
                     } else {
-                       System.out.println("\nLet's collect new data about you.");
-                        firstName = getStringInput("\nWhat is your first name?", scanner);
-                        lastName = getStringInput("What is your last name?", scanner);
-                        placeOfWork = getStringInput("Where do you work?", scanner);
-                        yearsOfWork = getIntInput("How many years have you worked for " + placeOfWork + "?", scanner);
+                        System.out.println("Invalid input. Please enter 'yes' or 'no'");
                     }
+                }
+
+                if (useExistingData) {
+                    firstName = previousData.get("First name");
+                    lastName = previousData.get("Last name");
+                    placeOfWork = previousData.get("Place of work");
+                    yearsOfWork = Integer.parseInt(previousData.get("Years worked in current role"));
+                } else {
+                    System.out.println("\nLet's collect new data about you.");
+                    firstName = getStringInput("\nWhat is your first name?", scanner);
+                    lastName = getStringInput("What is your last name?", scanner);
+                    placeOfWork = getStringInput("Where do you work?", scanner);
+                    yearsOfWork = getIntInput("How many years have you worked for " + placeOfWork + "?", scanner);
+                }
             } else {
                 firstName = getStringInput("\nWhat is your first name?", scanner);
                 lastName = getStringInput("What is your last name?", scanner);
